@@ -8,5 +8,5 @@ app
     port: env.PORT,
   })
   .then(() => {
-    console.log(`Server is running on port  ${env.PORT}`)
+    console.log(`Server is running on port ${env.PORT}`)
   })
