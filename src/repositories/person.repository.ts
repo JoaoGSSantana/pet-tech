@@ -6,12 +6,12 @@ export class PersonRepository {
     name,
     cpf,
     email,
-    birthday,
+    birth,
     user_id,
   }: Person): Promise<Person | undefined> {
     const result = await database.clientInstance?.query(
-      'INSERT INTO person (name, cpf, email, birthday, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, cpf, email, birthday, user_id],
+      'INSERT INTO person (name, cpf, email, birth, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [name, cpf, email, birth, user_id],
     )
 
     return result?.rows[0]
