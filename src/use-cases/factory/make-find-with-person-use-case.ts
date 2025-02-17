@@ -1,4 +1,5 @@
-import { UserRepository } from '@/repositories/user.repository'
+import { UserRepository } from '@/repositories/pg/user.repository'
+
 import { FindWithPersonUseCase } from '../find-with-person'
 
 export function makeFindWithPersonUseCase(): FindWithPersonUseCase {

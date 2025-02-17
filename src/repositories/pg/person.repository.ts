@@ -1,7 +1,9 @@
 import { Person } from '@/entities/person.entity'
 import { database } from '@/lib/pg/db'
 
-export class PersonRepository {
+import { IPersonRepository } from '../person.repository.interface'
+
+export class PersonRepository implements IPersonRepository {
   public async create({
     name,
     cpf,
