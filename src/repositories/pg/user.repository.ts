@@ -1,4 +1,4 @@
-import { Person } from '@/entities/person.entity'
+import { IPerson } from '@/entities/models/person.interface'
 import { User } from '@/entities/user.entity'
 import { database } from '@/lib/pg/db'
 
@@ -16,7 +16,7 @@ export class UserRepository implements IUserRepository {
 
   public async findWithPerson(
     userId: number,
-  ): Promise<(User & Person) | undefined> {
+  ): Promise<(User & IPerson) | undefined> {
     const result = await database.clientInstance?.query(
       `SELECT * FROM "user"  LEFT JOIN person ON "user".id = person.user_id WHERE "user".id = $1`,
       [userId],

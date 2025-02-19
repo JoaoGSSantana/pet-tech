@@ -1,5 +1,5 @@
 import { IAddress } from '@/entities/models/address.interface'
-import { Person } from '@/entities/person.entity'
+import { IPerson } from '@/entities/models/person.interface'
 import { database } from '@/lib/pg/db'
 import { IAddressRepository } from '@/repositories/address.repository.interface'
 
@@ -8,7 +8,7 @@ export class AddressRepository implements IAddressRepository {
     personId: number,
     page: number,
     limit: number,
-  ): Promise<(IAddress & Person)[]> {
+  ): Promise<(IAddress & IPerson)[]> {
     const offset = (page - 1) * limit
 
     const query = `
@@ -19,7 +19,7 @@ export class AddressRepository implements IAddressRepository {
     LIMIT $2 OFFSET $3
     `
 
-    const result = await database.clientInstance?.query<IAddress & Person>(
+    const result = await database.clientInstance?.query<IAddress & IPerson>(
       query,
       [personId, limit, offset],
     )
