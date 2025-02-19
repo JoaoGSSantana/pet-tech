@@ -1,4 +1,4 @@
-import { Address } from '@/entities/address.entity'
+import { IAddress } from '@/entities/models/address.interface'
 import { Person } from '@/entities/person.entity'
 
 export interface IAddressRepository {
@@ -6,6 +6,6 @@ export interface IAddressRepository {
     personId: number,
     page: number,
     limit: number,
-  ): Promise<(Address & Person)[]>
-  create(address: Address): Promise<Address | undefined>
+  ): Promise<(IAddress & Person)[]>
+  create(address: IAddress): Promise<IAddress | undefined>
 }
