@@ -4,7 +4,7 @@ import { IUserRepository } from '@/repositories/user.repository.interface'
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
-  async handle(user: IUser): Promise<IUser | undefined> {
+  async handler(user: IUser): Promise<IUser | undefined> {
     return this.userRepository.create(user)
   }
 }

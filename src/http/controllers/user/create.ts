@@ -13,7 +13,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const createUserUseCase = makeCreateUserUseCase()
 
-  const user = await createUserUseCase.handle({ username, password })
+  const user = await createUserUseCase.handler({ username, password })
 
   return reply.status(201).send(user)
 }
