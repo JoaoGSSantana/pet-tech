@@ -1,8 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+
+import { ICategory } from './models/category.interface'
 import { IProduct } from './models/product.interface'
+import { Category } from './category.entity'
 
 @Entity({
-  name: 'products',
+  name: 'product',
 })
 export class Product implements IProduct {
   @PrimaryGeneratedColumn('uuid', {
@@ -35,4 +44,20 @@ export class Product implements IProduct {
     type: 'double precision',
   })
   price: number
+
+  @ManyToMany(() => Category, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'product_category',
+    joinColumn: {
+      name: 'product_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'category_id',
+      referencedColumnName: 'id',
+    },
+  })
+  categories?: ICategory[] | undefined
 }
