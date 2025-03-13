@@ -25,6 +25,13 @@ const errorHandlerMap: ErrorHandleMap = {
   ) => {
     return reply.status(404).send({ message: error.message })
   },
+  InvalidCredentialsError: (
+    error: Error,
+    _: FastifyRequest,
+    reply: FastifyReply,
+  ) => {
+    return reply.status(404).send({ message: error.message })
+  },
 }
 
 export const globalErrorHandler = (
