@@ -13,6 +13,7 @@ import { userRoutes } from '@/http/controllers/user/routes'
 import { globalErrorHandler } from '@/utils/global-error-handler'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '@/env'
+import { validateJwt } from '@/http/middleware/jwt-validate'
 
 export const app = fastify()
 
@@ -22,6 +23,8 @@ app.register(fastifyJwt, {
     expiresIn: '10m',
   },
 })
+
+app.addHook('onRequest', validateJwt)
 
 app.register(personRoutes)
 app.register(userRoutes)
