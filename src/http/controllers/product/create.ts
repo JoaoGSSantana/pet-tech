@@ -1,6 +1,8 @@
-import { makeCreateProductUseCase } from '@/use-cases/factory/make-create-product-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
+
+import { makeCreateProductUseCase } from '@/use-cases/factory/make-create-product-use-case'
+import { createProductInStock } from '@/utils/client-http'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
@@ -30,6 +32,15 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     price,
     categories,
   })
+
+  await createProductInStock(
+    {
+      name: product!.name,
+      quantity: 0,
+      relationId: String(product!.id),
+    },
+    request.headers.authorization as string,
+  )
 
   return reply.status(201).send(product)
 }
